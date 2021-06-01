@@ -2,3 +2,4 @@
 .idea/
 postgresql-42.2.20.jar
 venv/
+*__pycache__*

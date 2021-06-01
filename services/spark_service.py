@@ -12,7 +12,12 @@ class SparkService:
 
     def __init__(self, conf):
         self.__conf = conf
-        self.__client = SparkSession.builder.appName('homework_app').getOrCreate()
+        self.__client = SparkSession.builder \
+            .config('spark.driver.extraClassPath',
+                    self.__conf['odbs_driver_path']) \
+            .master('local') \
+            .appName("test-airflow-project") \
+            .getOrCreate()
 
     def read_from_bronze(self, file_path):
         if not self.__is_valid_bronze_path(file_path):
@@ -30,8 +35,14 @@ class SparkService:
         return False
 
     def save_to_silver(self, table_name, df):
-        file_path = "%s/%s" % (self.__conf['hdfs']['silver_stage_dir'], table_name)
-        df.write.parquet(file_path, mode="overwrite")
+        df.write.jdbc(
+            self.__conf['greenplum_creds']['url'],
+            table=table_name,
+            properties={
+                "user": self.__conf['greenplum_creds']['user'],
+                "password": self.__conf['greenplum_creds']['password']
+            },
+            mode='overwrite')
 
     def create_empty_data_frame(self, fields):
         schema = []

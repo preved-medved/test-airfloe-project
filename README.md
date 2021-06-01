@@ -9,19 +9,33 @@ To run the project you need to set up "connections" in Airflow (Admin -> Connect
     * Password: 
     * Port: 5432
     * Extra: {"database":"dshop_bu"} - required
+   
+2. Connection to Greenplum
+    * Conn Id: oltp_greenplum
+    * Conn Type: postgres
+    * Host: 127.0.0.1
+    * Login: gpuser
+    * Password: 
+    * Port: 5433
+    * Extra: {"database":"test"} - required
 
-2. Connection to HDFS
+3. Connection to HDFS
     * Conn Id: hdfs_connection
     * Conn Type: HDFS
     * Host: 127.0.0.1
     * Login: user
     * Password: 
     * Port: 50070
-    * Extra: {"bronze_stage_dir":"/bronze","silver_stage_dir":"/silver"} - required
+    * Extra: {"bronze_stage_dir":"/bronze"} - required
 
-3. Connection to API
+4. Connection to API
     * Conn Id: out_of_stock_api
     * Conn Type: File (path)
     * Host: robot-dreams-de-api.herokuapp.com
     * Login: rd_dreams
     * Password: 
+   
+5. Odbc driver path
+    * Conn Id: odbc_driver_path
+    * Conn Type: File (path)
+    * Host: /driver/path/postgresql-42.2.20.jar

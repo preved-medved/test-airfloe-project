@@ -19,7 +19,7 @@ dag = DAG(
     dag_id="bronze_to_silver",
     description="Export data from Bronze (HDFS) to Silver (HDFS)",
     schedule_interval="@daily",
-    start_date=datetime(2021, 1, 1),
+    start_date=datetime(2021, 6, 1),
     default_args=default_args
 )
 

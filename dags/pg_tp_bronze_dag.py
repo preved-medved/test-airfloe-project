@@ -42,7 +42,7 @@ def load_task(table):
 dag = DAG(
     dag_id="pg_to_bronze",
     description="Export data from PG to Bronze (HDFS)",
-    schedule_interval="@daily",
+    schedule_interval="0 0 * * *",
     start_date=datetime(2021, 6, 1),
     default_args=default_args
 )

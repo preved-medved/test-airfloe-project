@@ -19,7 +19,7 @@ default_args = {
 out_of_stock_to_bronze_dag = DAG(
     'out_of_stock_to_bronze',
     description='Export data from out_of_stock API to Bronze (HDFS)',
-    schedule_interval='@daily',
+    schedule_interval='0 0 * * *',
     start_date=datetime(2021, 6, 1),
     default_args=default_args
 )
